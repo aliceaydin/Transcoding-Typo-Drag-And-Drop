@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Was hast du hier gefunden, ohne danach zu suchen?</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header id="topbar" aria-live="polite">
+    <div class="top-inner">
+      <div class="question">Was hast du hier gefunden, ohne danach zu suchen?</div>
+      <div class="controls">
+        <input id="answerInput" type="text" maxlength="65" placeholder="Deine Antwort (max 65 Zeichen)" aria-label="Antwort" />
+        <button id="printBtn" title="Drucken">Print</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="canvasWrapper">
+    <div id="canvas" aria-hidden="false"></div>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

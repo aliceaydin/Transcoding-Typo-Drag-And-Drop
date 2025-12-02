@@ -1,0 +1,58 @@
+:root{
+  --topbar-height:84px;
+  --bg:#ffffff;
+  --fg:#0b0b0b;
+  --muted:#9b9b9b;
+  --accent:#000000;
+  --max-width:920px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* Top bar */
+header#topbar{
+  position:fixed;inset:0 0 auto 0;height:var(--topbar-height);display:flex;align-items:center;justify-content:center;padding:10px;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.9));z-index:1200;border-bottom:1px solid rgba(0,0,0,0.06);backdrop-filter:blur(6px)
+}
+.top-inner{width:100%;max-width:var(--max-width);display:flex;gap:12px;align-items:center;padding:4px}
+.question{flex:1 1 0;font-weight:700;font-size:15px}
+.controls{display:flex;gap:10px;align-items:center}
+.controls input{padding:10px 12px;border-radius:8px;border:1px solid #e6e6e6;background:#fff;outline:none;font-size:16px;min-width:160px}
+.controls input:focus{box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.controls button{padding:10px 14px;border-radius:8px;border:2px solid var(--accent);background:var(--accent);color:#fff;font-weight:700}
+
+/* canvas area */
+#canvasWrapper{padding-top:var(--topbar-height);}
+#canvas{position:relative;width:100%;max-width:var(--max-width);margin:0 auto;padding:18px 14px;min-height:120vh;overflow:visible}
+
+/* each answer block occupies full width of canvas (no horizontal overflow) */
+.answer-block{
+  position:relative;display:block;width:100%;min-height:36px;margin:8px 0 18px;padding:8px 6px;overflow:visible;pointer-events:none
+}
+
+/* word elements are positioned absolutely within their block, but clamped to block width */
+.word{
+  position:absolute;display:inline-block;left:0;top:0;white-space:nowrap;line-height:1;pointer-events:none;user-select:none;color:var(--fg);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  transition:transform 220ms ease-out, opacity 180ms ease-out;
+}
+
+/* shapes (SVG wrappers) */
+.shape{position:absolute;left:0;top:0;width:100%;height:auto;pointer-events:none;opacity:0.08}
+
+/* visual treatment: subtle grid background for depth (prints faint) */
+#canvas::before{
+  content:'';position:absolute;inset:0;background-image:linear-gradient(transparent,transparent), linear-gradient(0deg, rgba(0,0,0,0.01) 1px, transparent 1px);background-size:100% 48px, 48px 48px;pointer-events:none;z-index:0
+}
+
+/* preserve no horizontal scrolling */
+html,body{overflow-x:hidden}
+
+/* responsiveness */
+@media (max-width:420px){:root{--topbar-height:96px} .question{font-size:14px} .controls input{min-width:120px;font-size:15px}}
+
+/* print tweaks */
+@media print{
+  header#topbar{display:none}
+  #canvas{padding:6mm}
+  @page{size:80mm auto;margin:0}
+}
